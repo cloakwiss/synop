@@ -1,3 +1,13 @@
+// To compile use the following command 
+// ❯ typst compile --ignore-system-fonts --font-path . synopsis.typ
+//
+// To compile and open use following command 
+// ❯ typst compile --ignore-system-fonts --font-path . --open <VIEWER> synopsis.typ
+//
+// And to edit with real-time feedback use the following command 
+// ❯ typst watch --ignore-system-fonts --font-path . --open <VIEWER> synopsis.typ
+// 
+// 
 // Some constant blocks
 #let first_page = [#align(center)[ 
 = BinStop \ (An binary executable behaviour analysis tool)
@@ -45,17 +55,21 @@ _*Guide*_ \ \
 )
 ]
 
+// 
 // Some global config
+// 
 
 #set text(hyphenate: false)
 #set par(justify: true)
-#set text(font: "Amazon Ember")
+#set text(kerning: true, font: "Amazon Ember")
 #set page(
   paper: "a4",
   margin: 2.5cm,
 )
 
+// 
 // Start of contents 
+// 
 
 #first_page
 #pagebreak()
