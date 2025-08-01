@@ -7,8 +7,20 @@
 // And to edit with real-time feedback use the following command 
 // ❯ typst watch --ignore-system-fonts --font-path . --open <VIEWER> synopsis.typ
 // 
-// 
+//
+// Some constants 
+
+#let names = (
+  ( name: "Aditya Bahe", roll_no: 28, ),
+  ( name: "Ayush Paranjale", roll_no: 35, ),
+  ( name: "Gunangi Bhagat", roll_no: 3, ),
+  ( name: "Himanshu Pawar", roll_no: 43, ),
+  ( name: "Prabhu Kalantri", roll_no: 55, ),
+)
+#let guide = "Prof. Koushik Roy"
+
 // Some constant blocks
+
 #let first_page = [#align(center)[ 
 = BinStop \ (An binary executable behaviour analysis tool)
 \
@@ -22,14 +34,12 @@ _*In*_
 \
 *_By_*\ 
 \
-  Aditya Bahe (28)  \
-  Ayush Paranjale (25) \
-  Gunangi Bhagat (3) \
-  Himanshu Pawar (43) \
-  Prabhu Kalantri (55) \
-  
+  #for kv in names {
+    [#kv.name (#kv.roll_no) \ ]
+  }  
+\
 _*Guide*_ \ \
-  Prof. Koushik Roy \ \
+  #guide \ \
 
 #image("logo.png", fit: "contain", height: 15%)
 
@@ -43,6 +53,28 @@ _*Guide*_ \ \
 ] ]
 
 #let last_page = [
+\ \
+#table(  
+  columns: (4fr, 1fr, 4fr),
+  table.header(
+    [*Name of Students*], [*Roll No.*], [*Name of Guide*]
+  ),
+  align: center,
+
+  ..{
+    let (name, roll_no) = names.at(0);
+    ([#name],  [#roll_no])
+  },
+  table.cell(
+    [#guide],
+    rowspan: names.len(),
+    align: horizon,
+  ),
+  ..for rec in names.slice(1,5) { 
+    ([#rec.name], [#rec.roll_no],)
+  }
+)
+\ \ \
 *Approved by:*
 \ \ \
 #grid(
@@ -67,9 +99,9 @@ _*Guide*_ \ \
   margin: 2.5cm,
 )
 
-// 
+
 // Start of contents 
-// 
+
 
 #first_page
 #pagebreak()
