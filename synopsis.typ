@@ -116,7 +116,7 @@ completely understanding the behaviors and performance impacts of these syscalls
 often not present in current tools, which results in inefficient analysis and pushed
 back debugging.
 
-
+\
 == PROBLEM DESCRIPTION :
 
 Debugging, performance optimisation, and security analysis of today's software  all
@@ -135,7 +135,7 @@ detecting malicious activity*/ by using tools such as Large Language Mo
 /* deeper */ insights. The goal of this tool is to provide a more thorough, effective, and
 perceptive method of examining how applications /* communicate */ behave and interact with the operating system
  which will ultimately speedup understanding the program behavior. /* security monitoring, performance tuning, and debugging */ 
-
+\ \
 == PROJECT OBJECTIVES :
 
 - _Intercept and Trace Syscalls_: Record and intercept system calls from programs, noting important information like timestamps, parameters, and return values.
@@ -146,7 +146,7 @@ perceptive method of examining how applications /* communicate */ behave an
 // - _Improve Security Monitoring_: Look for strange syscall patterns that might point to malicious activity or security flaws.
 - _Assist Reverse Engineering_: By tracking syscalls and discovering operational intent, this technique assists in the analysis and understanding of application workflow
 - _Examine Syscall Patterns_: Use syscall sequence analysis to find performance snags, redundancies, and odd behaviors.
-
+\ \
 == METHODOLOGY :
 
 - _Syscall Tracing_: When the application or EXE file launches, the syscall tracer is launched. Using hooking functions to intercept system calls while they are being executed, the tracer (shown as the Syscall Tracer Core in the flow) records syscalls made by the application.
@@ -155,6 +155,13 @@ perceptive method of examining how applications /* communicate */ behave an
 - _Log Enhancement_: After undergoing additional processing to include thorough descriptions, the logs are saved in the database for later retrieval and deeper insights.
 - _LLM Analysis_: To produce high-level insights, identify patterns, and find any problems—such as inefficiencies or questionable activity—the LLM examines the enriched logs. Rebuilding workflows and comprehending the purpose of the syscalls are aided by this step.
 - _Report Generation_: The results of the log analysis and LLM insights are compiled in a final report. This covers the behavior or workflow of the application, identified problems, performance snags, and possible security threats.
+
+#figure(
+  image("../flow_chart.png", height: 60%),
+  caption: [
+    Basic workflow
+  ],
+)
 
 == TECHNOLOGY :
 
@@ -165,7 +172,7 @@ perceptive method of examining how applications /* communicate */ behave an
 // - For creating organized, readable reports, use Markdown.
 - _Python and C++_: Python for log analysis and report generation, and C++ for syscall tracing.
 // - _SQL_: Used to manage and query database syscall data.
-
+\ 
 == FUNTIONAL SPECIFICATION :
 
 - Syscall logs are kept in a database and improved with information about expected behaviors, function names, and source code locations.
@@ -174,5 +181,5 @@ perceptive method of examining how applications /* communicate */ behave an
 - By identifying challenging syscalls, developers can use the insights to debug problems and improve system performance.
 - The program keeps an eye on syscall activity to spot odd or unauthorized activity, helping in spotting possible security risks.
 
-#pagebreak()
+\ \ 
 #last_page
