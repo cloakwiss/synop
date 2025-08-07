@@ -1,0 +1,35 @@
+---
+config:
+  layout: fixed
+---
+flowchart TD
+    A["Application/EXE Files"] -- Application starts --> B["Syscall Tracer Core"]
+    B --> C["Intercept Syscalls via Hooking Functions"]
+    C --> D["Logs"] & E["Database"]
+    D -.-> E
+    E --> F["Adding Descriptive Info"]
+    F --> G["Modified Logs Report"]
+    G --> H["LLM to Generate Workflow/Intent"]
+    H --> I["Final Report"]
+    I --> J["End of Process"]
+    D -. Log analytics .-> H
+    B -. Diagnostics .-> H
+     A:::blue
+     B:::green
+     C:::orange
+     D:::coral
+     E:::purple
+     F:::pink
+     G:::lightblue
+     H:::purple
+     I:::tomato
+     J:::grey
+    classDef blue fill:#4C9ED9,stroke:#2C3E50,stroke-width:2px
+    classDef green fill:#2ECC71,stroke:#2C3E50,stroke-width:2px
+    classDef orange fill:#F39C12,stroke:#2C3E50,stroke-width:2px
+    classDef coral fill:#FF7F50,stroke:#2C3E50,stroke-width:2px
+    classDef purple fill:#8E44AD,stroke:#2C3E50,stroke-width:2px
+    classDef pink fill:#FFB6C1,stroke:#2C3E50,stroke-width:2px
+    classDef lightblue fill:#ADD8E6,stroke:#2C3E50,stroke-width:2px
+    classDef tomato fill:#FF6347,stroke:#2C3E50,stroke-width:2px
+    classDef grey fill:#BDC3C7,stroke:#2C3E50,stroke-width:2px
