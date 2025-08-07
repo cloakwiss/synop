@@ -41,7 +41,7 @@ _*In*_
 _*Guide*_ \ \
   #guide \ \
 
-#image("logo.png", fit: "contain", height: 15%)
+#image("logo.png", fit: "contain", height: 12%)
 
 
 ==== Department of Computer Science and Engineering -- Cyber Security \ Shri Ramdeobaba College of Engineering & Management, Nagpur 440 013
@@ -93,7 +93,11 @@ _*Guide*_ \ \
 
 #set text(hyphenate: false)
 #set par(justify: true)
-#set text(kerning: true, font: "Amazon Ember")
+#set text(
+  kerning: true,
+  font: "PT Serif",
+  size: 12pt
+)
 #set page(
   paper: "a4",
   margin: 2.5cm,
@@ -105,11 +109,6 @@ _*Guide*_ \ \
 
 #first_page
 #pagebreak()
-#set text(
-  font: "PT Serif",
-  size: 12pt
-)
-
 
 == PROBLEM STATEMENT
 \
@@ -162,7 +161,7 @@ perceptive method of examining how applications /* communicate */ behave an
 - _Report Generation_: The results of the log analysis and LLM insights are compiled in a final report. This covers the behavior or workflow of the application, identified problems, performance snags, and possible security threats.
 
 #figure(
-  image("../flow_chart.png", height: 60%),
+  image("flow_chart.png", height: 60%),
   caption: [
     Basic workflow
   ],
