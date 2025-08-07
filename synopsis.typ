@@ -15,9 +15,9 @@
   ( name: "Ayush Paranjale", roll_no: 35, ),
   ( name: "Gunangi Bhagat", roll_no: 3, ),
   ( name: "Himanshu Pawar", roll_no: 43, ),
-  ( name: "Prabhu Kalantri", roll_no: 55, ),
+  ( name: "Prabhu Kalantri", roll_no: 56, ),
 )
-#let guide = "Prof. Koushik Roy"
+#let guide = "Prof. Kaushik Roy"
 
 // Some constant blocks
 
@@ -105,9 +105,14 @@ _*Guide*_ \ \
 
 #first_page
 #pagebreak()
+#set text(
+  font: "PT Serif",
+  size: 12pt
+)
+
 
 == PROBLEM STATEMENT
-
+\
 Knowing how an application interacts with the operating system is essential in domains
 such as security behavior analysis. Applications use system calls (syscalls) to ask
 the operating system for services, but it can be difficult to manually track and analyze
@@ -118,7 +123,7 @@ back debugging.
 
 \
 == PROBLEM DESCRIPTION :
-
+\
 Debugging, performance optimisation, and security analysis of today's software  all
 depend on understanding of how an application interacts with the operating system
 to request different services from the OS, like reading files, allocating
@@ -137,7 +142,7 @@ perceptive method of examining how applications /* communicate */ behave an
  which will ultimately speedup understanding the program behavior. /* security monitoring, performance tuning, and debugging */ 
 \ \
 == PROJECT OBJECTIVES :
-
+\
 - _Intercept and Trace Syscalls_: Record and intercept system calls from programs, noting important information like timestamps, parameters, and return values.
 - _Improve Log Context_: For better analysis, add more context to syscall logs, such as function names, source locations, and expected behaviors.
 - _Leverage LLM for Insights_: From enriched syscall logs, extract high-level insights, workflows, and intent by using Large Language Models (LLM).
@@ -148,7 +153,7 @@ perceptive method of examining how applications /* communicate */ behave an
 - _Examine Syscall Patterns_: Use syscall sequence analysis to find performance snags, redundancies, and odd behaviors.
 \ \
 == METHODOLOGY :
-
+\
 - _Syscall Tracing_: When the application or EXE file launches, the syscall tracer is launched. Using hooking functions to intercept system calls while they are being executed, the tracer (shown as the Syscall Tracer Core in the flow) records syscalls made by the application.
 //TODO: This needs to be split in 2
 - _Logging /*and Database Storage*/_: After being intercepted, the syscalls are recorded and kept in a database for later use. Function parameters, return values, and timestamps are among the crucial information found in logs. To add context, these logs are enhanced with extra descriptive data (such as function names and expected behavior).
@@ -162,9 +167,9 @@ perceptive method of examining how applications /* communicate */ behave an
     Basic workflow
   ],
 )
-
+\ \
 == TECHNOLOGY :
-
+\
 - _Detours Library_ is used in C++ to hook and intercept system calls.
 - _SQLite_: Used to store and handle enriched data and captured system call logs.
 - _Custom Parsing Logic_: To add more context to logs, like function names and expected behavior.
@@ -174,12 +179,12 @@ perceptive method of examining how applications /* communicate */ behave an
 // - _SQL_: Used to manage and query database syscall data.
 \ 
 == FUNTIONAL SPECIFICATION :
-
+\
 - Syscall logs are kept in a database and improved with information about expected behaviors, function names, and source code locations.
 - The enriched logs are analyzed by a Large Language Model (LLM) to find patterns and workflows as well as problems like performance difficulties or security threats.
 - Based on the analysis, the tool produces thorough reports that point out inefficiencies and security issues.
 - By identifying challenging syscalls, developers can use the insights to debug problems and improve system performance.
 - The program keeps an eye on syscall activity to spot odd or unauthorized activity, helping in spotting possible security risks.
 
-\ \ 
+\ \ \ \ \ \
 #last_page
