@@ -36,13 +36,15 @@
   margin: 2.5cm,
 )
 
+#show heading: set text(font: "Mona Sans", weight: "bold") 
 
 // Some constant blocks
 
 #let first_page = [
-#set text(font: "Mona Sans")
-// #show emph: it =>  text(font: "Mona Sans", it)
-// #show strong: it =>  text(font: "Mona Sans", it)
+
+#set text(font: "Mona Sans", weight: "bold")
+#show heading: set text(font: "Mona Sans", weight: "extrabold") 
+
 #align(center)[
   = BinStop \ (An PE executable behaviour analysis tool)
   \
@@ -52,12 +54,12 @@
   \
   _*In*_
   \
-  === COMPUTER SCIENCE AND ENGINEERING  (Cyber Security)
+  == COMPUTER SCIENCE AND ENGINEERING  (Cyber Security)
   \
   *_By_*\
   \
   #for kv in names {
-    [#kv.name (#kv.roll_no) \ ]
+    [*#kv.name (#kv.roll_no)*\ ]
   }
   \
   _*Guide*_ \ \
@@ -66,11 +68,11 @@
   #image("logo.png", fit: "contain", height: 12%)
 
 
-  === Department of Computer Science and Engineering -- Cyber Security \ Shri Ramdeobaba College of Engineering & Management, Nagpur 440 013
+  *Department of Computer Science and Engineering -- Cyber Security \ Shri Ramdeobaba College of Engineering & Management, Nagpur 440 013*
 
-  *(An Autonomous Institute affiliated to Rashtrasant Tukdoji Maharaj \ Nagpur University Nagpur)*
+  (An Autonomous Institute affiliated to Rashtrasant Tukdoji Maharaj \ Nagpur University Nagpur)
 
-  *February 2026*
+  February 2026
 
 ] ]
 
@@ -107,7 +109,6 @@
 
 // Start of contents
 
-#show heading: set text(font: "Mona Sans", weight: 600) 
 
 #first_page
 #pagebreak()
@@ -145,11 +146,11 @@ accelerating debugging, reverse engineering, and threat analysis workflows.
 \
 == PROJECT OBJECTIVES :
 
-==== Completed (Previous Semester):
+=== Completed (Previous Semester):
 - Implemented a system to intercept and trace WinAPI (Win32/API32) calls from executable programs, capturing parameters, timestamps, and return values.
 - Developed a database to store API metadata and descriptions, enabling contextual enrichment of collected logs.
 
-==== Current Objectives:
+=== Current Objectives:
 - Build a centralized medium to communicate and manage intercepted logs and API call data.
 - Increase interception coverage by adding support for more Win32 API hooks through an automated or semi-automated hook generation mechanism.
 - Utilize Large Language Models (LLMs) to extract behavioral insights, workflows, and potential security indicators.\ \
