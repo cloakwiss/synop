@@ -1,0 +1,26 @@
+a : Application/EXE
+b : Syscall Tracer
+c : Intercept Syscalls via Hooking Functions
+d1 : Logs
+d2 : Database
+e : Adding Description
+f : Modified Logs
+p : LLM to Generate Workflow/Intent
+q : Final
+
+
+a -> b : Application Starts
+b -> c
+b -> p : Diagnostics
+
+c -> d1
+c -> d2
+
+d2 -> d1
+d2 -> p : Log Analytics
+
+d1 -> e
+e -> f
+
+f -> p
+p -> q

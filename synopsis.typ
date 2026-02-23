@@ -160,7 +160,7 @@ accelerating debugging, reverse engineering, and threat analysis workflows.
 //- Report Generation: The results from log analysis and LLM insights are compiled into a final report. This report covers the application's behavior or workflow, identified problems, performance bottlenecks, and potential security threats.
 
 #figure(
-  image("flow_chart.png", height: 60%),
+  image("flow.jpeg"),
   caption: [
     Basic workflow
   ],
