@@ -1,27 +1,27 @@
-// To compile use the following command 
+// To compile use the following command
 // ❯ typst compile --ignore-system-fonts --font-path . synopsis.typ
 //
-// To compile and open use following command 
+// To compile and open use following command
 // ❯ typst compile --ignore-system-fonts --font-path . --open <VIEWER> synopsis.typ
 //
-// And to edit with real-time feedback use the following command 
+// And to edit with real-time feedback use the following command
 // ❯ typst watch --ignore-system-fonts --font-path . --open <VIEWER> synopsis.typ
-// 
 //
-// Some constants 
+//
+// Some constants
 
 #let names = (
   ( name: "Aditya Bahe", roll_no: 28, ),
   ( name: "Ayush Paranjale", roll_no: 35, ),
-  ( name: "Gunangi Bhagat", roll_no: 3, ),
   ( name: "Himanshu Pawar", roll_no: 43, ),
   ( name: "Prabhu Kalantri", roll_no: 56, ),
+  ( name: "Varad Pusadkar", roll_no: 3, ),
 )
-#let guide = "Prof. Kaushik Roy"
+#let guide = "Prof. Monika Bagde"
 
 // Some constant blocks
 
-#let first_page = [#align(center)[ 
+#let first_page = [#align(center)[
 = BinStop \ (An PE executable behaviour analysis tool)
 \
 === Synopsis submitted to \ Shri Ramdeobaba College of Engineering & Management, Nagpur \ in partial fulfillment of requirement for the award of the degree of
@@ -32,11 +32,11 @@ _*In*_
 \
 === COMPUTER SCIENCE AND ENGINEERING  (Cyber Security)
 \
-*_By_*\ 
+*_By_*\
 \
   #for kv in names {
     [#kv.name (#kv.roll_no) \ ]
-  }  
+  }
 \
 _*Guide*_ \ \
   #guide \ \
@@ -54,7 +54,7 @@ _*Guide*_ \ \
 
 #let last_page = [
 \ \
-#table(  
+#table(
   columns: (4fr, 1fr, 4fr),
   table.header(
     [*Name of Students*], [*Roll No.*], [*Name of Guide*]
@@ -70,7 +70,7 @@ _*Guide*_ \ \
     rowspan: names.len(),
     align: horizon,
   ),
-  ..for rec in names.slice(1,5) { 
+  ..for rec in names.slice(1,5) {
     ([#rec.name], [#rec.roll_no],)
   }
 )
@@ -87,9 +87,9 @@ _*Guide*_ \ \
 )
 ]
 
-// 
+//
 // Some global config
-// 
+//
 
 #set text(hyphenate: false)
 #set par(justify: true)
@@ -104,7 +104,7 @@ _*Guide*_ \ \
 )
 
 
-// Start of contents 
+// Start of contents
 
 
 #first_page
@@ -126,15 +126,15 @@ However, manually monitoring and deciphering these WinAPI calls becomes a challe
 
 - Improve Log Context: To enhance analysis, add more context to WinAPI call logs, such as function names, source code locations, and expected behaviors.
 
-- Leverage LLM for Insights: From enriched WinAPI call logs, extract high-level insights, workflows, and intent by using Large Language Models (LLM).
-
-- Create Reports: Create actionable, readable reports that highlight security threats, performance issues, and WinAPI call behavior.
-
-- Support Debugging and Profiling: Help developers identify and address issues related to faulty or inefficient WinAPI calls, thereby improving system performance.
+// - Support Debugging and Profiling: Help developers identify and address issues related to faulty or inefficient WinAPI calls, thereby improving system performance.
 
 - Assist Reverse Engineering: By tracking WinAPI calls and uncovering operational intent, this technique assists in analyzing and understanding the application workflow.
 
 - Examine WinAPI Call Patterns: Use WinAPI call sequence analysis to identify performance bottlenecks, redundancies, and abnormal behaviors.
+
+- Leverage LLM for Insights: From enriched WinAPI call logs, extract high-level insights, workflows, and intent by using Large Language Models (LLM).
+
+- Create Reports: Create actionable, readable reports that highlight security threats, performance issues, and WinAPI call behavior.
 \ \
 == METHODOLOGY :
 \
@@ -147,6 +147,7 @@ However, manually monitoring and deciphering these WinAPI calls becomes a challe
 - LLM Analysis: The Large Language Model (LLM) analyzes the enriched logs to generate high-level insights, identify patterns, and detect issues—such as inefficiencies or suspicious activities. This step aids in reconstructing workflows and understanding the purpose of the WinAPI calls.
 
 - Report Generation: The results from log analysis and LLM insights are compiled into a final report. This report covers the application's behavior or workflow, identified problems, performance bottlenecks, and potential security threats.
+
 #figure(
   image("flow_chart.png", height: 60%),
   caption: [
@@ -156,22 +157,27 @@ However, manually monitoring and deciphering these WinAPI calls becomes a challe
 \ \
 == TECHNOLOGY :
 
+- C/C++ for generated hooks
+
 - Detours Library is used in C++ to hook and intercept WinAPI calls.
+
+- RadDebugger: will be used as interface, custom command dispatching to debugger
 
 - SQLite is used to store and manage the enriched data and captured WinAPI call logs.
 
-- Custom Parsing Logic is employed to add more context to logs, such as function names and expected behavior.
+// - Custom Parsing Logic is employed to add more context to logs, such as function names and expected behavior.
 
-- ChatGPT (LLM): Used for WinAPI call intent analysis, insight generation, and enriched log analysis.
+// - ChatGPT (LLM): Used for WinAPI call intent analysis, insight generation, and enriched log analysis.
 
-- Python and C++: Python is used for log analysis and report generation, while C++ handles WinAPI call tracing.
+// - Python and C++: Python is used for log analysis and report generation, while C++ handles WinAPI call tracing.
+
 // - _SQL_: Used to manage and query database syscall data.
-\ 
+\
 == FUNTIONAL SPECIFICATION :
 \
 - WinAPI call logs are stored in a database and enriched with information regarding expected behaviors, function names, and source code locations.
 
-- The enriched logs are analyzed by a Large Language Model (LLM) to uncover patterns and workflows, as well as to detect issues like performance difficulties or security threats.
+// - The enriched logs are analyzed by a Large Language Model (LLM) to uncover patterns and workflows, as well as to detect issues like performance difficulties or security threats.
 
 - Based on the analysis, the tool generates comprehensive reports that highlight inefficiencies and security vulnerabilities.
 
