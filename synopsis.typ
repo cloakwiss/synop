@@ -11,80 +11,76 @@
 // Some constants
 
 #let names = (
-  ( name: "Aditya Bahe", roll_no: 28, ),
-  ( name: "Ayush Paranjale", roll_no: 35, ),
-  ( name: "Himanshu Pawar", roll_no: 43, ),
-  ( name: "Prabhu Kalantri", roll_no: 56, ),
-  ( name: "Varad Pusadkar", roll_no: 3, ),
+  (name: "Aditya Bahe", roll_no: 28),
+  (name: "Ayush Paranjale", roll_no: 35),
+  (name: "Himanshu Pawar", roll_no: 43),
+  (name: "Prabhu Kalantri", roll_no: 56),
+  (name: "Varad Pusadkar", roll_no: 66),
 )
-#let guide = "Prof. Monika Bagde"
+#let guide = "Prof. Monika Bagade"
 
 // Some constant blocks
 
 #let first_page = [#align(center)[
-= BinStop \ (An PE executable behaviour analysis tool)
-\
-=== Synopsis submitted to \ Shri Ramdeobaba College of Engineering & Management, Nagpur \ in partial fulfillment of requirement for the award of the degree of
+  = BinStop \ (An PE executable behaviour analysis tool)
+  \
+  === Synopsis submitted to \ Shri Ramdeobaba College of Engineering & Management, Nagpur \ in partial fulfillment of requirement for the award of the degree of
 
-== Bachelor of Technology (B.Tech)
-\
-_*In*_
-\
-=== COMPUTER SCIENCE AND ENGINEERING  (Cyber Security)
-\
-*_By_*\
-\
+  == Bachelor of Technology (B.Tech)
+  \
+  _*In*_
+  \
+  === COMPUTER SCIENCE AND ENGINEERING  (Cyber Security)
+  \
+  *_By_*\
+  \
   #for kv in names {
     [#kv.name (#kv.roll_no) \ ]
   }
-\
-_*Guide*_ \ \
+  \
+  _*Guide*_ \ \
   #guide \ \
 
-#image("logo.png", fit: "contain", height: 12%)
+  #image("logo.png", fit: "contain", height: 12%)
 
 
-==== Department of Computer Science and Engineering -- Cyber Security \ Shri Ramdeobaba College of Engineering & Management, Nagpur 440 013
+  ==== Department of Computer Science and Engineering -- Cyber Security \ Shri Ramdeobaba College of Engineering & Management, Nagpur 440 013
 
-(An Autonomous Institute affiliated to Rashtrasant Tukdoji Maharaj \ Nagpur University Nagpur)
+  (An Autonomous Institute affiliated to Rashtrasant Tukdoji Maharaj \ Nagpur University Nagpur)
 
-*July 2025*
+  *February 2026*
 
 ] ]
 
 #let last_page = [
-\ \
-#table(
-  columns: (4fr, 1fr, 4fr),
-  table.header(
-    [*Name of Students*], [*Roll No.*], [*Name of Guide*]
-  ),
-  align: center,
+  \ \
+  #table(
+    columns: (4fr, 1fr, 4fr),
+    table.header([*Name of Students*], [*Roll No.*], [*Name of Guide*]),
+    align: center,
 
-  ..{
-    let (name, roll_no) = names.at(0);
-    ([#name],  [#roll_no])
-  },
-  table.cell(
-    [#guide],
-    rowspan: names.len(),
-    align: horizon,
-  ),
-  ..for rec in names.slice(1,5) {
-    ([#rec.name], [#rec.roll_no],)
-  }
-)
-\ \ \
-*Approved by:*
-\ \ \
-#grid(
-  rows: 3cm,
-  columns: 3,
-  gutter: 1fr,
-  [*Head of Department* #parbreak() *Cyber Security*],
-  [*Guide* #parbreak() Prof. Koushik Roy],
-  [],
-)
+    ..{
+      let (name, roll_no) = names.at(0)
+      ([#name], [#roll_no])
+    },
+    table.cell(
+      [#guide],
+      rowspan: names.len(),
+      align: horizon,
+    ),
+    ..for rec in names.slice(1, 5) {
+      ([#rec.name], [#rec.roll_no])
+    },
+  )
+  \ \ \
+  *Approved by:*
+  \ \ \
+  #grid(
+    rows: 3cm,
+    columns: 3,
+    gutter: 1fr,
+    [*Head of Department* #parbreak() *Cyber Security*], [*Guide* #parbreak() Prof. Koushik Roy], [],
+  )
 ]
 
 //
@@ -96,7 +92,7 @@ _*Guide*_ \ \
 #set text(
   kerning: true,
   font: "PT Serif",
-  size: 12pt
+  size: 12pt,
 )
 #set page(
   paper: "a4",
@@ -116,26 +112,41 @@ Knowing how an application interacts with the operating system is essential in d
 
 \
 == PROBLEM DESCRIPTION :
-Debugging, performance optimization, and security analysis of today's software all depend on understanding how an application interacts with the operating system to request various services from the OS, such as reading files, allocating memory, or interacting with hardware. Applications primarily rely on WinAPI calls.
+Debugging, performance optimization, and security analysis of modern software depend
+heavily on understanding how an application interacts with the operating system to request
+services such as reading files, allocating memory, or interacting with hardware. Applications
+primarily rely on WinAPI calls to perform these operations.
 
-However, manually monitoring and deciphering these WinAPI calls becomes a challenging and time-consuming task. Debugging is often inefficient because current tools lack the depth and automation needed to fully analyze these interactions. Furthermore, these tools might not be able to identify unusual activity or potential security threats. The goal of this project is to create a behavior analyzer that will record, log, and examine WinAPI calls made by executable programs by adding comprehensive context to the logs. The tracer will assist developers, reverse engineers, and malware analysts in learning more about application and OS interactions by using tools such as Large Language Models (LLMs) for insights. The goal of this tool is to provide a more thorough, effective, and perceptive method of examining how applications behave and interact with the operating system, ultimately speeding up the understanding of program behavior.
+However, manually monitoring and interpreting these WinAPI calls remains a challenging
+and time-consuming task. Debugging is often inefficient because many existing tools lack the
+automation and contextual depth needed to fully analyze these interactions. Additionally, such
+tools may struggle to identify unusual activity or potential security threats effectively.
+
+In the previous semester, we established a foundational system for this project. We successfully
+implemented a mechanism to intercept API calls from the Windows API (specifically api32-
+related calls) made by executable programs. Alongside this, we developed a structured
+database capable of storing and retrieving detailed descriptions and contextual information
+for intercepted API calls. This foundation enables automated enrichment of raw logs with
+meaningful explanations, significantly improving interpretability.
+
+Building upon this groundwork, the goal of the project is to create a analyzer that records,
+logs, and examines WinAPI calls with enhanced contextual insights. The system will integrate
+intelligent analysis techniques, including the use of Large Language Models (LLMs), to provide
+deeper behavioral interpretation, anomaly detection, and security insights. The tracer aims
+to assist developers, reverse engineers, and malware analysts in understanding applicationOS interactions more efficiently and accurately. Ultimately, this tool seeks to deliver a
+more thorough, automated, and insightful approach to analyzing program behavior, thereby
+accelerating debugging, reverse engineering, and threat analysis workflows.
 \ \
 == PROJECT OBJECTIVES :
 \
-- Intercept and Trace WinAPI Calls: Record and intercept WinAPI calls from programs, capturing important information like timestamps, parameters, and return values.
+==== Completed (Previous Semester):
+- Implemented a system to intercept and trace WinAPI (Win32/API32) calls from executable programs, capturing parameters, timestamps, and return values.
+- Developed a database to store API metadata and descriptions, enabling contextual enrichment of collected logs.
 
-- Improve Log Context: To enhance analysis, add more context to WinAPI call logs, such as function names, source code locations, and expected behaviors.
-
-// - Support Debugging and Profiling: Help developers identify and address issues related to faulty or inefficient WinAPI calls, thereby improving system performance.
-
-- Assist Reverse Engineering: By tracking WinAPI calls and uncovering operational intent, this technique assists in analyzing and understanding the application workflow.
-
-- Examine WinAPI Call Patterns: Use WinAPI call sequence analysis to identify performance bottlenecks, redundancies, and abnormal behaviors.
-
-- Leverage LLM for Insights: From enriched WinAPI call logs, extract high-level insights, workflows, and intent by using Large Language Models (LLM).
-
-- Create Reports: Create actionable, readable reports that highlight security threats, performance issues, and WinAPI call behavior.
-\ \
+==== Current Objectives:
+- Build a centralized medium to communicate and manage intercepted logs and API call data.
+- Increase interception coverage by adding support for more Win32 API hooks through an automated or semi-automated hook generation mechanism.
+- Utilize Large Language Models (LLMs) to extract behavioral insights, workflows, and potential security indicators.\ \
 == METHODOLOGY :
 \
 - WinAPI Call Tracing: When the application or executable (EXE) file is launched, the WinAPI call tracer is activated. Using hooking functions to intercept WinAPI calls during their execution, the tracer (shown as the WinAPI Call Tracer Core in the flow) records the WinAPI calls made by the application.
@@ -146,7 +157,7 @@ However, manually monitoring and deciphering these WinAPI calls becomes a challe
 
 - LLM Analysis: The Large Language Model (LLM) analyzes the enriched logs to generate high-level insights, identify patterns, and detect issues—such as inefficiencies or suspicious activities. This step aids in reconstructing workflows and understanding the purpose of the WinAPI calls.
 
-- Report Generation: The results from log analysis and LLM insights are compiled into a final report. This report covers the application's behavior or workflow, identified problems, performance bottlenecks, and potential security threats.
+//- Report Generation: The results from log analysis and LLM insights are compiled into a final report. This report covers the application's behavior or workflow, identified problems, performance bottlenecks, and potential security threats.
 
 #figure(
   image("flow_chart.png", height: 60%),
@@ -175,15 +186,10 @@ However, manually monitoring and deciphering these WinAPI calls becomes a challe
 \
 == FUNTIONAL SPECIFICATION :
 \
-- WinAPI call logs are stored in a database and enriched with information regarding expected behaviors, function names, and source code locations.
-
-// - The enriched logs are analyzed by a Large Language Model (LLM) to uncover patterns and workflows, as well as to detect issues like performance difficulties or security threats.
-
-- Based on the analysis, the tool generates comprehensive reports that highlight inefficiencies and security vulnerabilities.
-
-- By identifying problematic WinAPI calls, developers can use the insights to debug and enhance system performance.
-
-- The tool monitors WinAPI call activity to detect abnormal or unauthorized behavior, aiding in the identification of potential security risks.
-
+- WinAPI call logs will be stored in a database and enriched with information regarding expected behaviors, function names, and source code locations.
+- The system will store and manage logs efficiently and allow users to start, stop, and monitor tracing sessions.
+- The system will support expansion of API coverage through additional hooks, including an automated or semi-automated hook generation mechanism.
+- By identifying problematic WinAPI calls, developers will be able to use the insights to debug and enhance system performance.
+- The tool will monitor WinAPI call activity to detect abnormal or unauthorized behavior, aiding in the identification of potential security risks.
 \ \ \
 #last_page
