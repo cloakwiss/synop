@@ -19,9 +19,31 @@
 )
 #let guide = "Prof. Monika Bagade"
 
+//
+// Some global config
+//
+
+#set text(hyphenate: false)
+#set par(justify: true)
+#set text(
+  kerning: true,
+  font: "Baskervville",
+  size: 12pt,
+)
+
+#set page(
+  paper: "a4",
+  margin: 2.5cm,
+)
+
+
 // Some constant blocks
 
-#let first_page = [#align(center)[
+#let first_page = [
+#set text(font: "Mona Sans")
+// #show emph: it =>  text(font: "Mona Sans", it)
+// #show strong: it =>  text(font: "Mona Sans", it)
+#align(center)[
   = BinStop \ (An PE executable behaviour analysis tool)
   \
   === Synopsis submitted to \ Shri Ramdeobaba College of Engineering & Management, Nagpur \ in partial fulfillment of requirement for the award of the degree of
@@ -44,9 +66,9 @@
   #image("logo.png", fit: "contain", height: 12%)
 
 
-  ==== Department of Computer Science and Engineering -- Cyber Security \ Shri Ramdeobaba College of Engineering & Management, Nagpur 440 013
+  === Department of Computer Science and Engineering -- Cyber Security \ Shri Ramdeobaba College of Engineering & Management, Nagpur 440 013
 
-  (An Autonomous Institute affiliated to Rashtrasant Tukdoji Maharaj \ Nagpur University Nagpur)
+  *(An Autonomous Institute affiliated to Rashtrasant Tukdoji Maharaj \ Nagpur University Nagpur)*
 
   *February 2026*
 
@@ -83,31 +105,14 @@
   )
 ]
 
-//
-// Some global config
-//
-
-#set text(hyphenate: false)
-#set par(justify: true)
-#set text(
-  kerning: true,
-  font: "PT Serif",
-  size: 12pt,
-)
-#set page(
-  paper: "a4",
-  margin: 2.5cm,
-)
-
-
 // Start of contents
 
+#show heading: set text(font: "Mona Sans", weight: 600) 
 
 #first_page
 #pagebreak()
 
 == PROBLEM STATEMENT
-\
 Knowing how an application interacts with the operating system is essential in domains such as security behavior analysis. Applications use WinAPI calls to request services from the operating system, but it can be difficult to manually track and analyze these WinAPI calls in large, complex systems. The depth and interactivity required to fully understand the behaviors and performance impacts of these WinAPI calls are often lacking in current tools, which leads to inefficient analysis and delayed debugging.
 
 \
@@ -136,9 +141,10 @@ deeper behavioral interpretation, anomaly detection, and security insights. The 
 to assist developers, reverse engineers, and malware analysts in understanding applicationOS interactions more efficiently and accurately. Ultimately, this tool seeks to deliver a
 more thorough, automated, and insightful approach to analyzing program behavior, thereby
 accelerating debugging, reverse engineering, and threat analysis workflows.
-\ \
-== PROJECT OBJECTIVES :
+
 \
+== PROJECT OBJECTIVES :
+
 ==== Completed (Previous Semester):
 - Implemented a system to intercept and trace WinAPI (Win32/API32) calls from executable programs, capturing parameters, timestamps, and return values.
 - Developed a database to store API metadata and descriptions, enabling contextual enrichment of collected logs.
@@ -147,25 +153,28 @@ accelerating debugging, reverse engineering, and threat analysis workflows.
 - Build a centralized medium to communicate and manage intercepted logs and API call data.
 - Increase interception coverage by adding support for more Win32 API hooks through an automated or semi-automated hook generation mechanism.
 - Utilize Large Language Models (LLMs) to extract behavioral insights, workflows, and potential security indicators.\ \
-== METHODOLOGY :
+
 \
-- WinAPI Call Tracing: When the application or executable (EXE) file is launched, the WinAPI call tracer is activated. Using hooking functions to intercept WinAPI calls during their execution, the tracer (shown as the WinAPI Call Tracer Core in the flow) records the WinAPI calls made by the application.
+== METHODOLOGY :
 
-- Logging: Once intercepted, the WinAPI calls are recorded and stored in a database for future reference. Key information such as function parameters, return values, and timestamps is logged. To add context, these logs are enhanced with additional descriptive data, such as function names and expected behaviors.
+- *WinAPI Call Tracing*: When the application or executable (EXE) file is launched, the WinAPI call tracer is activated. Using hooking functions to intercept WinAPI calls during their execution, the tracer (shown as the WinAPI Call Tracer Core in the flow) records the WinAPI calls made by the application.
 
-- Log Enhancement: After additional processing to include detailed descriptions, the logs are stored in the database for later retrieval and deeper insights.
+- *Logging*: Once intercepted, the WinAPI calls are recorded and stored in a database for future reference. Key information such as function parameters, return values, and timestamps is logged. To add context, these logs are enhanced with additional descriptive data, such as function names and expected behaviors.
 
-- LLM Analysis: The Large Language Model (LLM) analyzes the enriched logs to generate high-level insights, identify patterns, and detect issues—such as inefficiencies or suspicious activities. This step aids in reconstructing workflows and understanding the purpose of the WinAPI calls.
+- *Log Enhancement*: After additional processing to include detailed descriptions, the logs are stored in the database for later retrieval and deeper insights.
+
+- *LLM Analysis*: The Large Language Model (LLM) analyzes the enriched logs to generate high-level insights, identify patterns, and detect issues—such as inefficiencies or suspicious activities. This step aids in reconstructing workflows and understanding the purpose of the WinAPI calls.
 
 //- Report Generation: The results from log analysis and LLM insights are compiled into a final report. This report covers the application's behavior or workflow, identified problems, performance bottlenecks, and potential security threats.
 
 #figure(
-  image("flow.jpeg"),
+  image("flow.jpeg", height: 75%),
   caption: [
     Basic workflow
   ],
 )
-\ \
+
+\
 == TECHNOLOGY :
 
 - C/C++ for generated hooks
@@ -177,15 +186,13 @@ accelerating debugging, reverse engineering, and threat analysis workflows.
 - SQLite is used to store and manage the enriched data and captured WinAPI call logs.
 
 // - Custom Parsing Logic is employed to add more context to logs, such as function names and expected behavior.
-
 // - ChatGPT (LLM): Used for WinAPI call intent analysis, insight generation, and enriched log analysis.
-
 // - Python and C++: Python is used for log analysis and report generation, while C++ handles WinAPI call tracing.
-
 // - _SQL_: Used to manage and query database syscall data.
+
 \
 == FUNTIONAL SPECIFICATION :
-\
+
 - WinAPI call logs will be stored in a database and enriched with information regarding expected behaviors, function names, and source code locations.
 - The system will store and manage logs efficiently and allow users to start, stop, and monitor tracing sessions.
 - The system will support expansion of API coverage through additional hooks, including an automated or semi-automated hook generation mechanism.
